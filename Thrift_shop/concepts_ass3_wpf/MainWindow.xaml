@@ -1,0 +1,112 @@
+﻿<Controls:MetroWindow x:Class="CPL_assignment_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="500" Width="800"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1">
+            <Border.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
+            </Border.Background>
+            <TabControl TabStripPlacement="Left" SelectionChanged="TabControl_Selected_1">
+                <TabControl.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
+                </TabControl.Background>
+                <TabItem Name ="showProducts_tab" Header="Show Products" ></TabItem>
+                <TabItem Name ="addProduct_tab" Header="Add Product"></TabItem>
+                <TabItem Name ="selectProduct_tab" Header="Select Products"></TabItem>
+                <TabItem Name ="showBrands_tab" Header="Show Brands"></TabItem>
+                <TabItem Name ="sortProducts_tab" Header="Sort Products"></TabItem>
+            </TabControl>
+
+        </Border>
+        <Grid Name="showProduct_grid" Grid.Column="1" Loaded="showProduct_grid_Loaded_1" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"  Visibility="Visible">
+            <DataGrid Name="products_datagrid" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding product_name}"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding category}"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding price}"/>
+                    <DataGridTextColumn Header="brand" Binding="{Binding Brand.brand_name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Name="addProduct_grid" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Margin="10" Loaded="AddProduct_grid_Loaded">
+            <StackPanel>
+                <StackPanel Margin="5" Orientation="Horizontal" >
+                    <Label Content="Name: " Width="70"></Label>
+                    <TextBox Name="name_txt" Width="300"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="5" Orientation="Horizontal" >
+                    <Label Content="Price: " Width="70"></Label>
+                    <TextBox Name="price_txt" Width="300"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="5" Orientation="Horizontal" >
+                    <Label Content="Category: " Width="70"></Label>
+                    <TextBox Name="category_txt" Width="300"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="5" Orientation="Horizontal" >
+                    <Label Content="Brand: " Width="70"></Label>
+                    <ComboBox Name="brand_combo" Width="300" ItemsSource="{Binding}" DisplayMemberPath="brand_name" SelectedValuePath="brand_id"></ComboBox>
+                </StackPanel>
+                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <Button Name="addProduct_btn" Content="Add Product" Click="addProduct_btn_Click_1" ></Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+        <Grid Name="selectProducts_grid" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <StackPanel Margin="5" Orientation="Horizontal" >
+                    <Label Content="Price: " Width="70"></Label>
+                    <TextBox Name="selectPrice_txt" Width="300"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <Button Name="filterProducts_btn" Content="Filter Products" Click="FilterProducts_btn_Click" ></Button>
+                </StackPanel>
+                <StackPanel Margin="10" Height="340">
+                    <DataGrid Name ="filterProduct_grid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding product_name}"/>
+                            <DataGridTextColumn Header="Category" Binding="{Binding category}"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding price}"/>
+                            <DataGridTextColumn Header="brand" Binding="{Binding Brand.brand_name}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid Name="showBrands_grid" Grid.Column="1" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Loaded="ShowBrands_grid_Loaded">
+            <DataGrid Name="brands_datagrid"></DataGrid>
+        </Grid>
+        <Grid Name="sortProducts_grid" Grid.Column="1" Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel>
+                <StackPanel Margin="5" Orientation="Horizontal" >
+                    <Label Content="Sort by: " Width="70"></Label>
+                    <ComboBox Name="sortBy_combo" Width="170"  SelectionChanged="SortBy_combo_SelectionChanged" >
+                        <ComboBoxItem Content="Name"></ComboBoxItem>
+                        <ComboBoxItem Content="Price"></ComboBoxItem>
+                    </ComboBox>
+                    <Label Margin="20,0,0,0" Content="Direction: " Width="70"></Label>
+                    <ComboBox Name="direction_combo" Width="170"  SelectionChanged="Direction_combo_SelectionChanged" >
+                        <ComboBoxItem Content="Ascending"></ComboBoxItem>
+                        <ComboBoxItem Content="Descending"></ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="10" Height="340">
+                    <DataGrid Name="sortBy_datagrid" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding product_name}"/>
+                            <DataGridTextColumn Header="Category" Binding="{Binding category}"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding price}"/>
+                            <DataGridTextColumn Header="brand" Binding="{Binding Brand.brand_name}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Controls:MetroWindow>
